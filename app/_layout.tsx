@@ -14,17 +14,29 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
+  
+  const [fontsLoaded, error] = useFonts({
+    "Nunito-Black": require("../assets/fonts/Nunito/static/Nunito-Black.ttf"),
+    "Nunito-Bold": require("../assets/fonts/Nunito/static/Nunito-Bold.ttf"),
+    "Nunito-ExtraBold": require("../assets/fonts/Nunito/static/Nunito-ExtraBold.ttf"),
+    "Nunito-Light": require("../assets/fonts/Nunito/static/Nunito-Light.ttf"),
+    "Nunito-Medium": require("../assets/fonts/Nunito/static/Nunito-Medium.ttf"),
+    "Nunito-Regular": require("../assets/fonts/Nunito/static/Nunito-Regular.ttf"),
+    "Nunito-SemiBold": require("../assets/fonts/Nunito/static/Nunito-SemiBold.ttf"),
+  })
   useEffect(() => {
-    if (loaded) {
+    if (error) throw error;
+
+    if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded, error]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  if (!fontsLoaded && !error) {
     return null;
   }
 

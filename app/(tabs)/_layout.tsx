@@ -15,7 +15,7 @@ interface TabIconProps {
 const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
     return (
       <View className="flex items-center justify-center gap-2">
-        <DynamicIcon icon={icon} color={color} weight={focused ? "fill" : "regular"} />
+        <DynamicIcon icon={icon} color={color} weight={focused ? "fill" : "regular"} size={24} />
         <Text
           className={`${focused ? "font-semibold" : "font-regular"} text-sm`}
           style={{ color: color }}
@@ -52,6 +52,21 @@ const TabLayout = () => {
                             icon="House"
                             color={color}
                             name="Home"
+                        />
+                    )
+                }}
+            />
+            <Tabs.Screen 
+                name="todo"
+                options={{
+                    title: "",
+                    headerShown: false,
+                    tabBarIcon: ({color, focused}) => (
+                        <TabIcon 
+                            focused={focused}
+                            icon="CheckCircle"
+                            color={color}
+                            name="Todo"
                         />
                     )
                 }}
